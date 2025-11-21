@@ -17,7 +17,7 @@ import './App.css';
 function App() {
   return (
     <AuthProvider>
-      <Router>
+      <Router basename="/soraguide_v1/">
         <ScrollToTop />
         <div className="app">
           <Routes>
