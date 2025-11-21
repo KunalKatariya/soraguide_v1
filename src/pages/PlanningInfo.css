@@ -1,0 +1,253 @@
+.planning-info-page {
+    min-height: 100vh;
+    background: var(--color-bg);
+    padding: 8rem 0 4rem;
+}
+
+.planning-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.planning-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.planning-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.planning-header p {
+    font-size: 1.2rem;
+    color: var(--color-text-muted);
+}
+
+.planning-content {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.info-section {
+    background: var(--color-surface);
+    padding: 2.5rem;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+}
+
+.section-icon {
+    color: var(--color-primary);
+    margin-bottom: 1rem;
+}
+
+.info-section h2 {
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+    color: var(--color-text-main);
+}
+
+.info-section p {
+    line-height: 1.7;
+    color: var(--color-text-muted);
+    margin-bottom: 1.5rem;
+}
+
+/* Cities Grid */
+.cities-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.city-card {
+    background: rgba(0, 0, 0, 0.02);
+    padding: 1.5rem;
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.city-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.75rem;
+    color: var(--color-text-main);
+}
+
+.city-card p {
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.city-tag {
+    display: inline-block;
+    background: var(--color-primary-light);
+    color: var(--color-primary);
+    font-size: 0.7rem;
+    padding: 0.25rem 0.6rem;
+    border-radius: var(--radius-full);
+    margin-right: 0.5rem;
+    margin-top: 0.5rem;
+    font-weight: 600;
+}
+
+/* Resource List */
+.resource-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.resource-item {
+    background: rgba(0, 0, 0, 0.02);
+    padding: 1.5rem;
+    border-radius: var(--radius-md);
+    border-left: 4px solid var(--color-secondary);
+}
+
+.resource-item h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    color: var(--color-text-main);
+}
+
+.resource-item p {
+    font-size: 0.9rem;
+    margin-bottom: 0.75rem;
+}
+
+.resource-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-primary);
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: all var(--transition-fast);
+}
+
+.resource-link:hover {
+    color: var(--color-secondary);
+    gap: 0.75rem;
+}
+
+/* Cost Grid */
+.cost-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.cost-item {
+    background: rgba(0, 0, 0, 0.02);
+    padding: 1.5rem;
+    border-radius: var(--radius-md);
+    text-align: center;
+}
+
+.cost-item h4 {
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
+    color: var(--color-text-main);
+}
+
+.cost-amount {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: 0.5rem;
+}
+
+.cost-breakdown {
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    margin: 0;
+}
+
+/* Tips List */
+.tips-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 1rem;
+}
+
+.tips-list li {
+    position: relative;
+    padding-left: 2rem;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+    color: var(--color-text-main);
+}
+
+.tips-list li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--color-secondary);
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+/* Highlight Section */
+.highlight-section {
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.05), rgba(159, 122, 234, 0.05));
+    border: 1px solid rgba(99, 102, 241, 0.1);
+}
+
+/* CTA Section */
+.planning-cta {
+    text-align: center;
+    margin-top: 4rem;
+    padding: 3rem 0;
+}
+
+.btn-large {
+    padding: 1rem 2.5rem;
+    font-size: 1.1rem;
+}
+
+.cta-hint {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .planning-info-page {
+        padding: 6rem 0 2rem;
+    }
+
+    .planning-container {
+        padding: 0 1rem;
+    }
+
+    .planning-header h1 {
+        font-size: 2rem;
+    }
+
+    .planning-header p {
+        font-size: 1rem;
+    }
+
+    .info-section {
+        padding: 1.5rem;
+    }
+
+    .cities-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .cost-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
