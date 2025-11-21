@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/soraguide_v1/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>soraguide</title>
+    <script>
+        // GitHub Pages 404 redirect for client-side routing
+        (function () {
+            var path = window.location.pathname.replace('/soraguide_v1', '');
+            var search = window.location.search;
+            window.history.replaceState(null, null, '/soraguide_v1' + path + search + window.location.hash);
+        })();
+    </script>
+</head>
+
+<body>
+    <div id="root"></div>
+</body>
+
+</html>
