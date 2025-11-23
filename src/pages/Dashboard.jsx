@@ -6,6 +6,7 @@ import ProfileMenu from '../components/ProfileMenu';
 import WardChangeModal from '../components/Dashboard/WardChangeModal';
 import Chatbot from '../components/Chatbot/Chatbot';
 import { tips } from '../data/tips';
+import { MOVING_TASKS, SETTLED_TASKS } from '../data/tasks';
 import { useAuth } from '../context/AuthContext';
 import './Dashboard.css';
 
@@ -106,19 +107,41 @@ const Dashboard = () => {
     useEffect(() => {
         if (!currentUser) return;
 
-        // Default tasks
-        const defaultTasks = [
-            { id: 1, title: 'Register Address at Ward Office', description: 'Visit your local city hall within 14 days of moving.', category: 'Paperwork', completed: false, guideLink: '/guide/address' },
-            { id: 2, title: 'Get a Suica/Pasmo Card', description: 'Essential for trains and convenience stores.', category: 'Daily Life', completed: false, guideLink: '/guide/suica' },
-            { id: 3, title: 'Set up Bank Account', description: 'Recommended: JP Post Bank or Shinsei Bank.', category: 'Finance', completed: false },
-            { id: 4, title: 'Understand Trash Rules', description: 'Learn the sorting schedule for your area.', category: 'Daily Life', completed: false, guideLink: '/guide/trash' },
-            { id: 5, title: 'Find a Local Supermarket', description: 'Check for "Gyomu Super" for cheap groceries.', category: 'Food', completed: false },
-        ];
-
         // Check if we have stored tasks for this specific user
         const userTasksKey = `user_tasks_${currentUser.uid}`;
-        const storedTasks = JSON.parse(localStorage.getItem(userTasksKey));
-        setTasks(storedTasks || defaultTasks);
+        let storedTasks = JSON.parse(localStorage.getItem(userTasksKey));
+        const onboardingData = JSON.parse(localStorage.getItem('onboarding_data'));
+
+        // Intelligent sync: Check if stored tasks match the current onboarding stage
+        // Use currentUser.stage (from Auth) as primary source, fallback to onboardingData (from LS)
+        const currentStage = currentUser?.stage || onboardingData?.stage;
+
+        if (storedTasks && currentStage) {
+            const hasMovingTasks = storedTasks.some(t => t.id === 1); // ID 1 is "Register Address" (Moving)
+            const hasSettledTasks = storedTasks.some(t => t.id === 101); // ID 101 is "Check Disaster Kit" (Settled)
+            const shouldBeSettled = currentStage === 'settled';
+
+            // If mismatch, force reset to load the correct set
+            if (shouldBeSettled && hasMovingTasks) {
+                console.log('Mismatch detected: User is settled but has moving tasks. Resetting.');
+                storedTasks = null;
+            } else if (!shouldBeSettled && hasSettledTasks) {
+                console.log('Mismatch detected: User is moving but has settled tasks. Resetting.');
+                storedTasks = null;
+            }
+        }
+
+        if (storedTasks) {
+            setTasks(storedTasks);
+        } else {
+            // If no stored tasks (or we reset them), determine which default set to use
+            const isSettled = currentStage === 'settled';
+            const newTasks = isSettled ? SETTLED_TASKS : MOVING_TASKS;
+            setTasks(newTasks);
+
+            // Save the new default tasks immediately so they persist
+            localStorage.setItem(userTasksKey, JSON.stringify(newTasks));
+        }
 
     }, [currentUser]); // Only run on mount/user load, NOT on ward change anymore (handled manually)
 
